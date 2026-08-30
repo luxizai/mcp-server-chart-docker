@@ -1,0 +1,12 @@
+services:
+  mcp-server-chart:
+    image: ghcr.io/luxizai/mcp-server-chart-docker:latest
+    ports:
+      - "1122:1122"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:1122/health" ]
+      interval: 0s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
